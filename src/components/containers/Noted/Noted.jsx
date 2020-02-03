@@ -33,16 +33,19 @@ class Noted extends Component {
     }
 
     addNoteHandler = () => {
-        let currentNotesState = [
-            ...this.state.notes
-        ]
+        if (this.state.currentNoteTitle === '' && this.state.currentNoteBody === '') {
+            return
+        }
         const newNote = {
             title: this.state.currentNoteTitle,
             body: this.state.currentNoteBody,
-            tags: this.state.currentNoteTags
+            tags: this.state.currentNoteTags,
+            key: this.state.currentNoteTitle + Math.floor(Math.random() * 100)
         }
 
-        currentNotesState.push(newNote)
+        let currentNotesState = [
+            ...this.state.notes, newNote
+        ]
 
         this.setState({
             notes: currentNotesState,
@@ -52,11 +55,28 @@ class Noted extends Component {
         })
     }
 
+    noteSummaryClickHandler = (key) => {
+        const clicked = this.state.notes.filter(note => note.key === key);
+       
+    }
+
+    deleteNoteHandler = (key) => {
+        const filteredNotes = this.state.notes.filter(item => item.key !== key)
+        this.setState({
+            notes: filteredNotes
+        })
+    }
+
+
+
     render(){
         return (
           <>
             <SummaryBox 
                 addNote={this.addNoteHandler} 
+                notes={this.state.notes}
+                summaryClicked={this.noteSummaryClickHandler}
+                minusClicked={this.deleteNoteHandler}
             />
             <NoteTaker
                 noteWritten={this.noteChangeHandler}

@@ -1,0 +1,13 @@
+.NoteSummaryContainer {
+    box-sizing: border-box;
+    padding: 0 10px;
+    border: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+.NoteSummaryContainer h5 {
+    font-weight: lighter;
+    cursor: pointer;
+}
+
