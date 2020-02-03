@@ -7,18 +7,19 @@ const summaryBox = props => {
     return (
       <div className={classes.SummaryContainer}>
         <input type="text" placeholder="SearchBar" />
-        <button onClick={props.addNote}>+</button>
+        <button onClick={props.addNote} className={classes.AddButton}>
+          <span role="img" aria-label="Add this note">➕</span>
+        </button>
         <div className={classes.NotesSummary}>
-          <p>tags toggle</p>
           <div className={classes.NoteSummariesContainer}>
             {props.notes.map(eachNote => {
               return (
-                  <NoteSummary
-                    note={eachNote}
-                    key={eachNote.key}
-                    noteClick={props.summaryClicked}
-                    minusClick={props.minusClicked}
-                  />
+                <NoteSummary
+                  note={eachNote}
+                  key={eachNote.key}
+                  noteClick={props.summaryClicked}
+                  minusClick={props.minusClicked}
+                />
               );
             })}
           </div>

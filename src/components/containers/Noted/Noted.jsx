@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import classes from './Noted.module.css'
 import SummaryBox from '../../SummaryBox/SummaryBox'
 import NoteTaker from '../../NoteTaker/NoteTaker'
+import NoteReadView from '../NoteReadView/NoteReadView'
 
 class Noted extends Component {
     state = {
@@ -9,7 +10,8 @@ class Noted extends Component {
         currentNoteTitle: '',
         currentNoteBody: '',
         currentNoteTags: [],
-        searchedText: ''
+        searchedText: '',
+        currentReadingNote: null
     }
 
     titleChangeHandler = (event) => {
@@ -57,6 +59,9 @@ class Noted extends Component {
 
     noteSummaryClickHandler = (key) => {
         const clicked = this.state.notes.filter(note => note.key === key);
+        this.setState({
+            currentReadingNote: clicked
+        })
        
     }
 
@@ -67,9 +72,29 @@ class Noted extends Component {
         })
     }
 
+    resetReadNoteHandler = () => {
+        this.setState({currentReadingNote: null})
+    }
+
 
 
     render(){
+        let viewNote = this.state.currentReadingNote;
+        if (viewNote) {
+            viewNote = (
+                <NoteReadView 
+                note={this.state.currentReadingNote}
+                resetRead={this.resetReadNoteHandler} />
+            )
+        } else viewNote = (
+                 <NoteTaker
+                   noteWritten={this.noteChangeHandler}
+                   titleWritten={this.titleChangeHandler}
+                   trashClick={this.trashClickHandler}
+                   title={this.state.currentNoteTitle}
+                   body={this.state.currentNoteBody}
+                 />
+               );
         return (
           <>
             <SummaryBox 
@@ -78,13 +103,7 @@ class Noted extends Component {
                 summaryClicked={this.noteSummaryClickHandler}
                 minusClicked={this.deleteNoteHandler}
             />
-            <NoteTaker
-                noteWritten={this.noteChangeHandler}
-                titleWritten={this.titleChangeHandler}
-                trashClick={this.trashClickHandler}
-                title={this.state.currentNoteTitle}
-                body={this.state.currentNoteBody}
-            />
+            {viewNote}
           </>
         );
     }

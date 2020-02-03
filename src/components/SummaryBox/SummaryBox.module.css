@@ -13,3 +13,9 @@ li {
     font-size: 0.5em;
     margin-left: 0;
 }
+
+.AddButton{
+    background-color: #fff;
+    border: none;
+
+}

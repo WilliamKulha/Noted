@@ -37,8 +37,11 @@ textarea {
     cursor: pointer;
     border: none;
     font-size: .75sem;
+    background-color: #fff;
 }
-
+.TrashButton span {
+    background-color: white;
+}
 .trashButton:focus {
     border: none;
 }
