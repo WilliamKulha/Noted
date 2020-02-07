@@ -151,7 +151,7 @@ class Noted extends Component {
                  />
                );
         return (
-          <>
+            <div className={classes.Wrapper}>
             <SummaryBox 
                 addNote={this.addNoteHandler} 
                 notes={this.state.notes}
@@ -161,7 +161,7 @@ class Noted extends Component {
                 searchField={this.state.currentSearchField}
             />
             {viewNote}
-          </>
+          </div>
         );
     }
 }

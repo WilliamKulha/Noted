@@ -1,0 +1,12 @@
+.Wrapper {
+    display: flex;
+    flex-flow: column;
+}
+
+
+
+@media only screen and (min-width: 500px) {
+    .Wrapper {
+        flex-flow: row;
+    }
+}
