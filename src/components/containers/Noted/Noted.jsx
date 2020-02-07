@@ -11,7 +11,12 @@ class Noted extends Component {
         currentNoteBody: '',
         currentNoteTags: [],
         searchedText: '',
-        currentNoteKey: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
+        currentNoteKey: Math.random()
+                            .toString(36)
+                            .substring(2, 15) + 
+                        Math.random()
+                            .toString(36)
+                            .substring(2, 15),
         currentReadingNote: null
     }
 
