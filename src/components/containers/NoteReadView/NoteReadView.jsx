@@ -8,12 +8,26 @@ class NoteReadView extends Component{
     render(){
         return (
           <div className={classes.ReadViewWrapper}>
-            <button onClick={this.props.resetRead}>
-              <span role="img" aria-label="Close this note">✖️</span>
-            </button>
-            <p>editControl</p>
-            <h5>{this.props.note[0].title}</h5>
-            <p>{this.props.note[0].body}</p>
+            <div className={classes.TopWrapper}>
+              <button
+                className={classes.CloseButton}
+                onClick={this.props.resetRead}
+              >
+                <span role="img" aria-label="Close this note">
+                  ✖️
+                </span>
+              </button>
+              <button
+                className={classes.EditButton}
+                onClick={this.props.turnOnEdit}
+              >
+                Edit
+              </button>
+            </div>
+            <div className={classes.NoteWrapper}>
+              <h5>{this.props.note[0].title}</h5>
+              <p>{this.props.note[0].body}</p>
+            </div>
           </div>
         );
     }

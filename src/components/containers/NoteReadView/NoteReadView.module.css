@@ -1,0 +1,37 @@
+.ReadViewWrapper {
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.EditButton {
+    background-color: #add8e6;
+    border: none;
+    font-size: 0.75em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.CloseButton {
+    background-color: #fff;
+    border:none;
+    cursor: pointer;
+    font-size: 0.75em;
+}
+.TopWrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 5px;
+}
+
+.NoteWrapper {
+    padding: 5px;
+}
+
+.NoteWrapper h5 {
+    margin-bottom: 0.5em;
+}
+
+.NoteWrapper p {
+    font-size: 0.65em;
+}

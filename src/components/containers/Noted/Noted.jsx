@@ -11,6 +11,7 @@ class Noted extends Component {
         currentNoteBody: '',
         currentNoteTags: [],
         searchedText: '',
+        currentNoteKey: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
         currentReadingNote: null
     }
 
@@ -38,23 +39,51 @@ class Noted extends Component {
         if (this.state.currentNoteTitle === '' && this.state.currentNoteBody === '') {
             return
         }
+
+
         const newNote = {
             title: this.state.currentNoteTitle,
             body: this.state.currentNoteBody,
             tags: this.state.currentNoteTags,
-            key: this.state.currentNoteTitle + Math.floor(Math.random() * 100)
+            key: this.state.currentNoteKey
         }
+
+        //Check if note key already exists
+        const notesCopy = [...this.state.notes]
+
+        for (let i = 0; i < notesCopy.length; i ++) {
+            if (notesCopy[i].key === newNote.key) {
+                notesCopy.splice(i, 1, newNote)
+                this.setState({
+                  notes: notesCopy,
+                  currentNoteBody: "",
+                  currentNoteTitle: "",
+                  currentNoteTags: []
+                });
+                return
+            }
+            
+            i++
+        }
+        
 
         let currentNotesState = [
             ...this.state.notes, newNote
         ]
 
         this.setState({
-            notes: currentNotesState,
-            currentNoteBody: '',
-            currentNoteTitle: '',
-            currentNoteTags: []
-        })
+          notes: currentNotesState,
+          currentNoteBody: "",
+          currentNoteTitle: "",
+          currentNoteTags: [],
+          currentNoteKey:
+            Math.random()
+              .toString(36)
+              .substring(2, 15) +
+            Math.random()
+              .toString(36)
+              .substring(2, 15)
+        });
     }
 
     noteSummaryClickHandler = (key) => {
@@ -76,16 +105,31 @@ class Noted extends Component {
         this.setState({currentReadingNote: null})
     }
 
+    editClickhandler = () => {
+        const selectedNote = this.state.currentReadingNote[0]
+        console.log(selectedNote)
+        this.setState({
+            currentReadingNote: null,
+            currentNoteTitle: selectedNote.title,
+            currentNoteBody: selectedNote.body,
+            currentNoteTags: selectedNote.tags,
+            currentNoteKey: selectedNote.key
+            })
+
+    }
+
 
 
     render(){
         let viewNote = this.state.currentReadingNote;
         if (viewNote) {
             viewNote = (
-                <NoteReadView 
+              <NoteReadView
                 note={this.state.currentReadingNote}
-                resetRead={this.resetReadNoteHandler} />
-            )
+                resetRead={this.resetReadNoteHandler}
+                turnOnEdit={this.editClickhandler}
+              />
+            );
         } else viewNote = (
                  <NoteTaker
                    noteWritten={this.noteChangeHandler}
