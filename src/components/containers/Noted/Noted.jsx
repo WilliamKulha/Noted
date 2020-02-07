@@ -6,6 +6,7 @@ import NoteReadView from '../NoteReadView/NoteReadView'
 
 class Noted extends Component {
     state = {
+        currentSearchField: '',
         notes: [],
         currentNoteTitle: '',
         currentNoteBody: '',
@@ -112,7 +113,6 @@ class Noted extends Component {
 
     editClickhandler = () => {
         const selectedNote = this.state.currentReadingNote[0]
-        console.log(selectedNote)
         this.setState({
             currentReadingNote: null,
             currentNoteTitle: selectedNote.title,
@@ -121,6 +121,12 @@ class Noted extends Component {
             currentNoteKey: selectedNote.key
             })
 
+    }
+
+    searchChangeHandler = (e) => {
+        this.setState({
+            currentSearchField: e.target.value
+        })
     }
 
 
@@ -151,6 +157,8 @@ class Noted extends Component {
                 notes={this.state.notes}
                 summaryClicked={this.noteSummaryClickHandler}
                 minusClicked={this.deleteNoteHandler}
+                searchChange={this.searchChangeHandler}
+                searchField={this.state.currentSearchField}
             />
             {viewNote}
           </>

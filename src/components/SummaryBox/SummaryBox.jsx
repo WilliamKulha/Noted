@@ -21,16 +21,22 @@ const summaryBox = props => {
         </div>
         <div className={classes.NotesSummary}>
           <div className={classes.NoteSummariesContainer}>
-            {props.notes.map(eachNote => {
-              return (
+            {props.notes
+              .filter((note) =>
+                note.title
+                .toLowerCase()
+                .includes(props.searchField.toLowerCase())
+                )
+              .map((eachNote) => (
                 <NoteSummary
                   note={eachNote}
                   key={eachNote.key}
                   noteClick={props.summaryClicked}
                   minusClick={props.minusClicked}
                 />
-              );
-            })}
+                )
+              )
+            }
           </div>
         </div>
       </div>
